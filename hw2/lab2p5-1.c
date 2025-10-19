@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 // Node structure
 struct Node {
@@ -97,27 +96,24 @@ void displayLinkedList(struct Linkedlist LL) {
 }
 
 // Test the functions
-int main(int argc, char *argv[]) {
-   if(argc < 2){
-        printf("ERROR: The program must read at least an argument.\n");
-        return 0;
-    }
-    //Create new list and setup
-    struct Linkedlist list;
-    char* cur;
-    for(int i = 1; i < argc; i++){
-         cur = argv[i];
-        if(findNode(list, cur) > -1){
-            deleteNode(&list, cur);
-            continue;
-        }
+int main() {
+    struct Linkedlist LL;
+    LL.head = NULL;
 
-        if(isupper(*cur)) insertAtBeginning(&list, cur);
-        else insertAtTheEnd(&list, cur); 
-    }
+    insertAtBeginning(&LL, "banana");
+    insertAtBeginning(&LL, "apple");
+    insertAtTheEnd(&LL, "cherry");
+    insertAtTheEnd(&LL, "date");
 
-    printf("The list:- ");
-    displayLinkedList(list);
+    displayLinkedList(LL);
+
+    printf("Position of 'cherry': %d\n", findNode(LL, "cherry"));
+    printf("Position of 'mango': %d\n", findNode(LL, "mango"));
+
+    deleteNode(&LL, "apple");
+    deleteNode(&LL, "mango"); // not in list
+
+    displayLinkedList(LL);
 
     return 0;
 }

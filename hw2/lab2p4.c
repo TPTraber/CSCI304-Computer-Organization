@@ -135,6 +135,5 @@ int main(int argc, char *argv[]){
     printf("The list:- ");
     displayLinkedList(&list);
 
-
     return 0;
 }
